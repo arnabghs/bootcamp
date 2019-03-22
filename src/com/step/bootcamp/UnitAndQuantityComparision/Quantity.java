@@ -16,17 +16,22 @@ class Quantity {
     Unit quantityUnit = ((Quantity) o).unit;
     double quantityValue = ((Quantity) o).value;
     if (!quantityUnit.isSameType(this.unit)) return false;
-    double baseValue = this.unit.convertToBaseValue(this.value);
-    return baseValue == quantityUnit.convertToBaseValue(quantityValue);
+    double thisBaseValue = this.unit.convertToBaseValue(this.value);
+    double quantityBaseValue = quantityUnit.convertToBaseValue(quantityValue);
+    return Math.floor(thisBaseValue) == Math.floor(quantityBaseValue);
   }
 
   Quantity add(Quantity quantity) throws Exception {
     if (!quantity.unit.isSameType(this.unit)) {
       throw new Exception("type is not same");
     }
-    double quantityBaseValue = quantity.unit.convertToBaseValue(quantity.value);
-    double ownBaseValue = this.unit.convertToBaseValue(this.value);
-    double sum = (ownBaseValue + quantityBaseValue) / this.unit.getRatio();
-    return new Quantity(sum, this.unit);
+
+    Unit standardUnit = this.unit.getStandardUnit();
+    double thisQuantityValue = this.unit.convertValueTo(standardUnit, this.value);
+    Quantity thisQuantity =  new Quantity(thisQuantityValue, standardUnit);
+    double anotherQuantityValue = quantity.unit.convertValueTo(standardUnit, quantity.value);
+    Quantity anotherQuantity = new Quantity(anotherQuantityValue, standardUnit);
+    double valueInStandardUnit = thisQuantity.value + anotherQuantity.value;
+    return new Quantity(valueInStandardUnit, standardUnit);
   }
 }

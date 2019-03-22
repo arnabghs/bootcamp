@@ -92,13 +92,32 @@ class QuantityTest {
     Quantity expectedQuantity = new Quantity(2, Unit.INCH);
     assertEquals(expectedQuantity, actualQuantity);
   }
-  @Test
 
+  @Test
   void shouldConvertToFirstTypeBeforeAddingIfUnitsAreDifferent() throws Exception {
-    Quantity oneInch = new Quantity(1, Unit.INCH);
+    Quantity oneInch = new Quantity(2, Unit.INCH);
     Quantity twoPointFiveCm = new Quantity(2.5D, Unit.CENTIMETER);
     Quantity actualQuantity = twoPointFiveCm.add(oneInch);
-    Quantity expectedQuantity = new Quantity(5, Unit.CENTIMETER);
+    Quantity expectedQuantity = new Quantity(3, Unit.INCH);
     assertEquals(expectedQuantity, actualQuantity);
   }
+
+  @Test
+  void shouldAddOneFeetWithTwoInches() throws Exception {
+    Quantity twoFeet = new Quantity(2, Unit.FEET);
+    Quantity twoInches = new Quantity(2, Unit.INCH);
+    Quantity actualQuantity = twoFeet.add(twoInches);
+    Quantity expectedQuantity = new Quantity(26, Unit.INCH);
+    assertEquals(expectedQuantity, actualQuantity);
+  }
+
+  @Test
+  void shouldAddOneGallonWithOneLiter() throws Exception {
+    Quantity OneGallon = new Quantity(1, Unit.GALLON);
+    Quantity OneLiter = new Quantity(1, Unit.LITER);
+    Quantity actualQuantity = OneGallon.add(OneLiter);
+    Quantity expectedQuantity = new Quantity(4.78, Unit.LITER);
+    assertEquals(expectedQuantity,actualQuantity);
+  }
 }
+
