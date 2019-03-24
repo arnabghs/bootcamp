@@ -1,4 +1,4 @@
-package com.step.bootcamp;
+package com.step.bootcamp.dimension;
 
 public class Square extends Rectangle {
   public Square(Dimension length) {

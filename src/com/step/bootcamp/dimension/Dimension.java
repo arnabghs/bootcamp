@@ -1,4 +1,4 @@
-package com.step.bootcamp;
+package com.step.bootcamp.dimension;
 
 public class Dimension {
   private Double value;

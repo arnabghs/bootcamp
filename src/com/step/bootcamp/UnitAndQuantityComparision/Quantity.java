@@ -26,11 +26,18 @@ class Quantity {
       throw new Exception("type is not same");
     }
 
+    if (quantity.unit instanceof ScaleUnit){
+      throw new Exception("this type of unit cannot be added");
+    }
+
     Unit standardUnit = this.unit.getStandardUnit();
+
     double thisQuantityValue = this.unit.convertValueTo(standardUnit, this.value);
-    Quantity thisQuantity =  new Quantity(thisQuantityValue, standardUnit);
+    Quantity thisQuantity = new Quantity(thisQuantityValue, standardUnit);
+
     double anotherQuantityValue = quantity.unit.convertValueTo(standardUnit, quantity.value);
     Quantity anotherQuantity = new Quantity(anotherQuantityValue, standardUnit);
+
     double valueInStandardUnit = thisQuantity.value + anotherQuantity.value;
     return new Quantity(valueInStandardUnit, standardUnit);
   }

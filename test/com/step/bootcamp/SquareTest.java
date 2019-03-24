@@ -1,5 +1,7 @@
 package com.step.bootcamp;
 
+import com.step.bootcamp.dimension.Dimension;
+import com.step.bootcamp.dimension.Square;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
